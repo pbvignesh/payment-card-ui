@@ -1,0 +1,300 @@
+<html>
+    <head>
+        <title>Payment Card UI</title>
+        <link href='https://fonts.googleapis.com/css?family=Source Sans Pro' rel='stylesheet'>
+        <link href='https://fonts.googleapis.com/css?family=Source Code Pro' rel='stylesheet'>
+        <style>
+            body {
+                background-color: rgb(224 242 254);
+            }
+
+            input {
+                font-family: 'Source Sans Pro';
+                font-size: 20px;
+                padding-left: 12px;
+                text-transform: uppercase;
+                border: 1px solid black;
+            }
+
+            button {
+                font-family: 'Source Sans Pro';
+                font-size: 20px;
+                background-color: rgb(37 99 235);
+                color: white;
+                border-radius: 4px;
+                border: none;
+            }
+
+            .card-scene {
+                perspective: 1000px;
+            }
+
+            .payment-card {
+                transition: transform 1s;
+                transform-style: preserve-3d;
+            }
+
+            .payment-card.is_flipped {
+                transform: rotateY(180deg);
+            }
+
+            .payment-card-front, .payment-card-back {
+                backface-visibility: hidden;
+            }
+
+            .payment-card-back {
+                background: white;
+                transform: rotateY(180deg);
+            }
+
+            .payment-card-front {
+                border-radius: 20px;
+                width: 440px;
+                height: 240px;
+                margin: auto;
+                margin-top: 120px;
+                background: linear-gradient(to right, #183159, #1B578F);
+                box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+                position: relative;
+                z-index: 3;
+            }
+
+            .payment-card-top-header {
+                display: flex;
+                flex-direction: row;
+                justify-content: space-between;
+            }
+
+            .payment-card-chip {
+                display: flex;
+                border-radius: 4px;
+                margin-top: 40px;
+                margin-left: 20px;
+                width: 60px;
+                height: 40px;
+                background-color: #DBA85B;
+            }
+
+            .chip-left-horizontal-line-group {
+                display: flex;
+                flex-direction: column;
+                width: 20px;
+                justify-content: space-around;
+            }
+
+            .chip-left-horizontal-line {
+                border: 1px solid #BA8237;
+                width: 20px;
+            }
+
+            .chip-left-curve {
+                border: 1px solid #BA8237;
+                margin-right: 0px;
+                margin-left: 0px;
+                border-radius: 5px 0 0 5px;
+                height: 10px;
+                margin-top: 15px;
+            }
+
+            .chip-left-vertical-line {
+                background-color: #BA8237;
+                height: 40px;
+                width: 2px;
+            }
+
+            .chip-right-vertical-line {
+                background-color: #BA8237;
+                height: 40px;
+                width: 2px;
+                margin-left: 20px;
+            }
+
+            .mastercard-logo {
+                margin-right: 20px;
+                margin-top: 36px;
+            }
+
+            .payment-card-number {
+                display: flex;
+                justify-content: space-around;
+                border: 2px solid #CBD5E1;
+                border-radius: 8px;
+                color: rgb(226 232 240);
+                margin-top: 16px;
+                margin-left: 24px;
+                margin-right: 24px;
+                padding-top: 8px;
+                height: 44px;
+                font-family: 'Source Code Pro';
+                font-size: 24px;
+            }
+
+            .payment-card-footer {
+                display: flex;
+                margin-top: 20px;
+                justify-content: space-between;
+                padding-left: 32px;
+                padding-right: 32px;
+                font-family: 'Source Code Pro';
+            }
+
+            .payment-card-holder-label, .payment-card-expiry-label {
+                color: #CBD5E1;
+            }
+
+            .payment-card-holder-value, .payment-card-expiry-value {
+                margin-top: 4px;
+                color: rgb(226 232 240);
+            }
+
+            .payment-card-back {
+                background-color: red;
+                transform: rotateY(180deg);
+            }
+
+            .form {
+                font-family: 'Source Sans Pro';
+                border-radius: 10px;
+                background-color: white;
+                height: 320px;
+                width: 550px;
+                margin-top: -100px;
+                padding-top: 140px;
+                padding-left: 24px;
+                padding-right: 24px;
+                margin-left: auto;
+                margin-right: auto;
+                box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+            }
+
+            .form-card-number-label, .form-card-name-label {
+                margin-top: 20px;
+            }
+
+            .form-card-number-input, .form-card-name-input {
+                width: 550px;
+                height: 40px;
+                border-radius: 4px;
+                border-color: rgb(197 201 206);
+            }
+
+            .form-card-expiry-month-input, .form-card-expiry-year-input {
+                font-size: 24px;
+                width: 140px;
+                margin-right: 20px;
+                padding-left: 12px;
+                border-radius: 4px;
+                border-color: rgb(197 201 206);
+            }
+
+            .form-card-expiry-cvv-group {
+                display: flex;
+                justify-content: space-between;
+                margin-top: 20px;
+            }
+
+            .form-card-cvv-input {
+                border-radius: 4px;
+                border-color: rgb(197 201 206);
+            }
+
+            .form-card-submit-button {
+                width: 550px;
+                margin-top: 20px;
+                height: 40px;
+                box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+            }
+        </style>
+    </head>
+    <body>
+        <div class="card-scene">
+            <div class="payment-card">
+                <div class="payment-card-front">
+                    <div class="payment-card-top-header">
+                        <div class="payment-card-chip">
+                            <div class="chip-left-horizontal-line-group">
+                                <div class="chip-left-horizontal-line"></div>
+                                <div class="chip-left-horizontal-line"></div>
+                                <div class="chip-left-horizontal-line"></div>
+                            </div>
+                            <div class="chip-left-curve"></div>
+                            <div class="chip-left-vertical-line"></div>
+                            <div class="chip-right-vertical-line"></div>
+                        </div>
+                        <div class="mastercard-logo">
+                            <img src="assets/mastercard.png" height="50px" width="50px">
+                        </div>
+                    </div>
+                    <div class="payment-card-number">
+                        <span class="payment-card-number-group">1234</span>
+                        <span class="payment-card-number-group">****</span>
+                        <span class="payment-card-number-group">****</span>
+                        <span class="payment-card-number-group">1023</span>
+                    </div>
+                    <div class="payment-card-footer">
+                        <div class="payment-card-holder-group">
+                            <div class="payment-card-holder-label">Card Holder</div>
+                            <div class="payment-card-holder-value">Vignesh PB</div>
+                        </div>
+                        <div class="payment-card-expiry-group">
+                            <div class="payment-card-expiry-label">Expires</div>
+                            <div class="payment-card-expiry-value">MM/YY</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="payment-card-back">
+
+                </div>
+            </div>
+        </div>
+
+        <div class="form">
+            <div class="form-card-number-label">Card Number</div>
+            <input class="form-card-number-input">
+            <div class="form-card-name-label">Card Name</div>
+            <input class="form-card-name-input">
+            <div class="form-card-expiry-cvv-group">
+                <div class="form-card-expiry-group">
+                    <div class="form-card-expiry-label">Expiration Date</div>
+                    <div class="form-card-expiry-inputs">
+                        <select class="form-card-expiry-month-input">
+                            <option value="Month" selected hidden disabled>Month</option>
+                            <option value="01">01</option>
+                            <option value="02">02</option>
+                            <option value="03">03</option>
+                            <option value="04">04</option>
+                            <option value="05">05</option>
+                            <option value="06">06</option>
+                            <option value="07">07</option>
+                            <option value="08">08</option>
+                            <option value="09">09</option>
+                            <option value="10">10</option>
+                            <option value="11">11</option>
+                            <option value="12">12</option>
+                          </select>
+                        <select class="form-card-expiry-year-input">
+                            <option value="Year" selected hidden disabled>Year</option>
+                            <option value="2030">2030</option>
+                            <option value="2029">2029</option>
+                            <option value="2028">2028</option>
+                            <option value="2027">2027</option>
+                            <option value="2026">2026</option>
+                            <option value="2025">2025</option>
+                            <option value="2024">2024</option>
+                            <option value="2023">2023</option>
+                            <option value="2022">2022</option>
+                            <option value="2021">2021</option>
+                            <option value="2020">2020</option>
+                            <option value="2019">2019</option>
+                          </select>
+                    </div>
+                </div>
+                <div class="form-card-cvv-group">
+                    <div class="form-card-expiry-label">CVV</div>
+                    <input class="form-card-cvv-input">
+                </div>
+            </div>
+            <button class="form-card-submit-button">Submit</button>
+        </div>
+    </body>
+</html>
