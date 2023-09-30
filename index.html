@@ -6,10 +6,6 @@
         <link rel="stylesheet" href="style.css">
     </head>
     <body>
-        <!--1)added id to payment-card 
-            2)some content to payment-card-back
-            3)onclick() to form-card-cvv-input-->
-
         <script src="index.js" defer></script>
         <div class="card-scene">
             <div class="payment-card" id="container">
@@ -47,44 +43,22 @@
                     </div>
                 </div>
                 <div class="payment-card-back">
-                    <div class="payment-card-top-header">
-                        <div class="payment-card-chip">
-                            <div class="chip-left-horizontal-line-group">
-                                <div class="chip-left-horizontal-line"></div>
-                                <div class="chip-left-horizontal-line"></div>
-                                <div class="chip-left-horizontal-line"></div>
-                            </div>
-                            <div class="chip-left-curve"></div>
-                            <div class="chip-left-vertical-line"></div>
-                            <div class="chip-right-vertical-line"></div>
-                        </div>
-                        <div class="mastercard-logo">
-                           <img src="assets/mastercard.png" height="50px" width="50px">
-                        </div>
+                    <div class="payment-card-back-top-black-bar">
                     </div>
-                    <div class="payment-card-number">
-                        <span class="payment-card-number-group">1234</span>
-                        <span class="payment-card-number-group">****</span>
-                        <span class="payment-card-number-group">****</span>
-                        <span class="payment-card-number-group">1023</span>
+                    <div class="payment-card-back-cvv-input-group">
+                        <p class="payment-card-back-cvv-input-label">CVV</p>
+                        <input class="payment-card-back-cvv-input">
                     </div>
-                    <div class="payment-card-footer">
-                        <div class="payment-card-holder-group">
-                            <div class="payment-card-holder-label">Card Holder</div>
-                            <div class="payment-card-holder-value">Vignesh PB</div>
-                        </div>
-                        <div class="payment-card-expiry-group">
-                            <div class="payment-card-expiry-label">CVV</div>
-                        </div>
+                    <div class="payment-card-back-mastercard-logo">
+                        <img src="assets/mastercard.png" height="50px" width="50px">
                     </div>
-
                 </div>
             </div>
         </div>
 
         <div class="form">
             <div class="form-card-number-label">Card Number</div>
-            <input class="form-card-number-input">
+            <input type="number" class="form-card-number-input" oninput="updateCardNumber()">
             <div class="form-card-name-label">Card Name</div>
             <input class="form-card-name-input">
             <div class="form-card-expiry-cvv-group">
@@ -125,7 +99,7 @@
                 </div>
                 <div class="form-card-cvv-group">
                     <div class="form-card-expiry-label">CVV</div>
-                    <input class="form-card-cvv-input" onclick="rotate()">
+                    <input class="form-card-cvv-input" onfocus="rotate()" onfocusout="rotateBack()">
                 </div>
             </div>
             <button class="form-card-submit-button">Submit</button>

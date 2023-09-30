@@ -10,6 +10,10 @@ input {
     border: 1px solid black;
 }
 
+input::-webkit-inner-spin-button, input::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+}
+
 button {
     font-family: 'Source Sans Pro';
     font-size: 20px;
@@ -22,22 +26,20 @@ button {
 .card-scene {
     width: 440px; /*fixed height width and margin */
     height: 240px;
-    margin:180px auto;
-    margin-top: 80px;
+    /* margin:180px auto; */
+    margin-left: auto;
+    margin-right: auto;
+    /* margin-top: 80px; */
     perspective: 1000px;
 }
 
 .payment-card {
     width: 100%;
     height: 100%;
+
     transition: transform 1s;
     transform-style: preserve-3d;
 }
-
-/*.payment-card.is_flipped {
-    transform: rotateY(180deg);
-}*/
-
 
 .payment-card-front, .payment-card-back {
     width: 100%;
@@ -59,7 +61,6 @@ button {
     margin-top: 120px;
     background: linear-gradient(to right, #183159, #1B578F);
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-    /*position: relative;*/
     z-index: 3;
 }
 
@@ -152,7 +153,7 @@ button {
 }
 
 .payment-card-back {
-    background-color: red;
+    background: linear-gradient(to left, #183159, #1B578F);
     transform: rotateY(180deg);
     border-radius: 20px;
     margin: auto;
@@ -165,14 +166,10 @@ button {
     border-radius: 10px;
     background-color: white;
     height: 320px;
-    /*width: 550px;*/
     width: 600px;
-    /*margin-top: -100px;*/
-    margin-top: -150px;
+    margin-top: -10px;
     padding-top: 140px;
-    /*padding-left: 24px;*/
     padding-left: 45px;
-    /*padding-right: 24px;*/
     margin-left: auto;
     margin-right: auto;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
@@ -218,4 +215,31 @@ button {
     margin-top: 20px;
     height: 40px;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.payment-card-back-top-black-bar {
+    margin-top: 40px;
+    height: 40px;
+    background-color: black;
+}
+
+.payment-card-back-cvv-input-label {
+    font-family: 'Source Sans Pro';
+    color: white;
+    text-align: right;
+    margin-right: 20px;
+}
+
+.payment-card-back-cvv-input {
+    width: 400px;
+    margin-left: 20px;
+    border-radius: 4px;
+    border-color: rgb(197 201 206);
+    text-align: right;
+}
+
+.payment-card-back-mastercard-logo {
+    text-align: right;
+    margin-top: 20px;
+    margin-right: 20px;
 }
